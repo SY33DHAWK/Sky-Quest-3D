@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Quest 3D - Ultimate Flight Arcade Game</title>
+    <style>
+        :root {
+            /* Primitive Color Tokens */
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-teal-800: rgba(41, 150, 161, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+        
+            /* RGB versions for opacity control */
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-slate-500-rgb: 98, 108, 113;
+            --color-red-500-rgb: 192, 21, 47;
+            --color-red-400-rgb: 255, 84, 89;
+            --color-orange-500-rgb: 168, 75, 47;
+            --color-orange-400-rgb: 230, 129, 97;
+        
+            /* Background color tokens (Light Mode) */
+            --color-bg-1: rgba(59, 130, 246, 0.08);
+            --color-bg-2: rgba(245, 158, 11, 0.08);
+            --color-bg-3: rgba(34, 197, 94, 0.08);
+            --color-bg-4: rgba(239, 68, 68, 0.08);
+            --color-bg-5: rgba(147, 51, 234, 0.08);
+            --color-bg-6: rgba(249, 115, 22, 0.08);
+            --color-bg-7: rgba(236, 72, 153, 0.08);
+            --color-bg-8: rgba(6, 182, 212, 0.08);
+        
+            /* Semantic Color Tokens (Light Mode) */
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-error: var(--color-red-500);
+            --color-success: var(--color-teal-500);
+            --color-warning: var(--color-orange-500);
+            --color-info: var(--color-slate-500);
+            --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+            --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+        
+            /* Typography */
+            --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            --font-size-xs: 11px;
+            --font-size-sm: 12px;
+            --font-size-base: 14px;
+            --font-size-md: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 18px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 24px;
+            --font-size-4xl: 30px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 550;
+            --font-weight-bold: 600;
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+            --letter-spacing-tight: -0.01em;
+        
+            /* Spacing */
+            --space-0: 0;
+            --space-1: 1px;
+            --space-2: 2px;
+            --space-4: 4px;
+            --space-6: 6px;
+            --space-8: 8px;
+            --space-10: 10px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+        
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-base: 8px;
+            --radius-md: 10px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+        
+            /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+        
+            /* Animation */
+            --duration-fast: 150ms;
+            --duration-normal: 250ms;
+            --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family-base);
+            background: #000;
+            color: var(--color-white);
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        #gameContainer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #gameCanvas {
+            display: block;
+            cursor: crosshair;
+        }
+        
+        .ui-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0,119,190,0.9) 0%, rgba(135,206,235,0.9) 100%);
+            pointer-events: all;
+            text-align: center;
+        }
+        
+        .game-title {
+            font-size: 4rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-32);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #FFD700, #FFF, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .start-button {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border: none;
+            padding: var(--space-16) var(--space-32);
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+            pointer-events: all;
+            margin-bottom: var(--space-24);
+            box-shadow: 0 4px 15px rgba(33,128,141,0.4);
+        }
+        
+        .start-button:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(33,128,141,0.6);
+        }
+        
+        .controls-info {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        .hud {
+            position: absolute;
+            top: var(--space-20);
+            left: var(--space-20);
+            right: var(--space-20);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            pointer-events: none;
+        }
+        
+        .hud-left, .hud-right {
+            background: rgba(0,0,0,0.4);
+            padding: var(--space-16);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .score-display {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: var(--space-8);
+        }
+        
+        .hud-stat {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-4);
+            display: flex;
+            justify-content: space-between;
+            min-width: 120px;
+        }
+        
+        .hud-label {
+            opacity: 0.8;
+        }
+        
+        .hud-value {
+            font-weight: var(--font-weight-semibold);
+            color: #87CEEB;
+        }
+        
+        .game-over-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: rgba(0,0,0,0.9);
+            pointer-events: all;
+            text-align: center;
+        }
+        
+        .game-over-title {
+            font-size: 3rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-32);
+            color: #FF4444;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .final-score {
+            font-size: 2rem;
+            margin-bottom: var(--space-16);
+            color: #FFD700;
+        }
+        
+        .high-score {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-32);
+            color: #87CEEB;
+        }
+        
+        .restart-button {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border: none;
+            padding: var(--space-12) var(--space-24);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-medium);
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+            pointer-events: all;
+        }
+        
+        .restart-button:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-1px);
+        }
+        
+        .pause-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: rgba(0,0,0,0.8);
+            pointer-events: all;
+            text-align: center;
+        }
+        
+        .pause-title {
+            font-size: 2.5rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-24);
+            color: #87CEEB;
+        }
+        
+        .pause-info {
+            font-size: var(--font-size-xl);
+            opacity: 0.9;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+        }
+        
+        .crosshair::before,
+        .crosshair::after {
+            content: '';
+            position: absolute;
+            background: rgba(255,255,255,0.8);
+        }
+        
+        .crosshair::before {
+            width: 2px;
+            height: 20px;
+            left: 9px;
+            top: 0;
+        }
+        
+        .crosshair::after {
+            width: 20px;
+            height: 2px;
+            left: 0;
+            top: 9px;
+        }
+
+        @font-face {
+            font-family: 'FKGroteskNeue';
+            src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div class="ui-overlay">
+            <!-- Start Screen -->
+            <div id="startScreen" class="start-screen">
+                <h1 class="game-title">SKY QUEST 3D</h1>
+                <button id="startButton" class="start-button">START FLIGHT</button>
+                <div class="controls-info">
+                    <div><strong>WASD / Arrow Keys:</strong> Control Aircraft</div>
+                    <div><strong>Space:</strong> Boost Speed</div>
+                    <div><strong>P / ESC:</strong> Pause Game</div>
+                    <div><strong>Fly through golden rings &amp; avoid obstacles!</strong></div>
+                </div>
+            </div>
+            
+            <!-- Game HUD -->
+            <div id="gameHUD" class="hud hidden">
+                <div class="hud-left">
+                    <div class="score-display" id="scoreDisplay">0</div>
+                    <div class="hud-stat">
+                        <span class="hud-label">Rings:</span>
+                        <span class="hud-value" id="ringsCollected">0</span>
+                    </div>
+                </div>
+                <div class="hud-right">
+                    <div class="hud-stat">
+                        <span class="hud-label">Speed:</span>
+                        <span class="hud-value" id="speedDisplay">0</span>
+                    </div>
+                    <div class="hud-stat">
+                        <span class="hud-label">Altitude:</span>
+                        <span class="hud-value" id="altitudeDisplay">0</span>
+                    </div>
+                    <div class="hud-stat">
+                        <span class="hud-label">Distance:</span>
+                        <span class="hud-value" id="distanceDisplay">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Crosshair -->
+            <div id="crosshair" class="crosshair hidden"></div>
+            
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" class="game-over-screen hidden">
+                <h2 class="game-over-title">MISSION FAILED</h2>
+                <div class="final-score" id="finalScore">Score: 0</div>
+                <div class="high-score" id="highScore">Best: 0</div>
+                <button id="restartButton" class="restart-button">FLY AGAIN (R)</button>
+            </div>
+            
+            <!-- Pause Screen -->
+            <div id="pauseScreen" class="pause-screen hidden">
+                <h2 class="pause-title">FLIGHT PAUSED</h2>
+                <div class="pause-info">Press P or ESC to resume</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Game Configuration (from provided data)
+        const CONFIG = {
+            title: "SKY QUEST 3D",
+            initial_speed: 50,
+            max_speed: 120,
+            acceleration_rate: 0.5,
+            turn_speed: 2.5,
+            camera_distance: 15,
+            camera_height: 5,
+            fog_near: 50,
+            fog_far: 300,
+            obstacles: {
+                ring: {
+                    radius: 8,
+                    tube_radius: 0.8,
+                    color: 0xFFD700,
+                    spawn_interval: 80,
+                    points: 100
+                },
+                mountain: {
+                    size_range: [10, 30],
+                    color: 0x8B7355,
+                    spawn_interval: 100
+                },
+                cloud_barrier: {
+                    size_range: [15, 25],
+                    spawn_interval: 120
+                }
+            },
+            scoring: {
+                ring_collected: 100,
+                distance_multiplier: 10,
+                speed_bonus_threshold: 80
+            },
+            colors: {
+                sky_top: 0x0077BE,
+                sky_bottom: 0x87CEEB,
+                ground: 0x90EE90,
+                airplane_body: 0xFF4444,
+                airplane_wings: 0xFFFFFF,
+                sun: 0xFFFACD,
+                cloud: 0xF0F8FF
+            }
+        };
+
+        // Game Variables
+        let scene, camera, renderer, airplane, propeller;
+        let gameState = 'start'; // 'start', 'playing', 'paused', 'gameOver'
+        let score = 0, rings = 0, distance = 0, speed = CONFIG.initial_speed;
+        let highScore = 0;
+        let obstacles = [], particles = [], clouds = [];
+        let keys = {};
+        let lastRingSpawn = 0, lastMountainSpawn = 0, lastCloudSpawn = 0;
+        let startTime, gameTime = 0;
+        let cameraShake = 0;
+
+        // Initialize the game
+        function init() {
+            // Create scene
+            scene = new THREE.Scene();
+            
+            // Setup camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            
+            // Setup renderer with high quality settings
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: document.getElementById('gameCanvas'),
+                antialias: true,
+                alpha: false
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 0.8;
+
+            // Create atmospheric fog
+            scene.fog = new THREE.Fog(CONFIG.colors.sky_bottom, CONFIG.fog_near, CONFIG.fog_far);
+            
+            // Setup lighting
+            setupLighting();
+            
+            // Create sky and environment
+            createSky();
+            createGround();
+            
+            // Create airplane
+            createAirplane();
+            
+            // Create particle systems
+            initParticles();
+            
+            // Setup event listeners
+            setupControls();
+            
+            // Position camera initially
+            updateCamera();
+            
+            // Start render loop
+            animate();
+        }
+
+        function setupLighting() {
+            // Hemisphere light for ambient lighting
+            const hemiLight = new THREE.HemisphereLight(CONFIG.colors.sky_top, CONFIG.colors.ground, 0.6);
+            scene.add(hemiLight);
+            
+            // Directional light (sun)
+            const dirLight = new THREE.DirectionalLight(CONFIG.colors.sun, 1.0);
+            dirLight.position.set(100, 100, 50);
+            dirLight.castShadow = true;
+            dirLight.shadow.mapSize.width = 2048;
+            dirLight.shadow.mapSize.height = 2048;
+            dirLight.shadow.camera.near = 0.1;
+            dirLight.shadow.camera.far = 500;
+            dirLight.shadow.camera.left = -100;
+            dirLight.shadow.camera.right = 100;
+            dirLight.shadow.camera.top = 100;
+            dirLight.shadow.camera.bottom = -100;
+            scene.add(dirLight);
+            
+            // Point light for effects
+            const pointLight = new THREE.PointLight(0xffffff, 0.3, 100);
+            pointLight.position.set(0, 20, 0);
+            scene.add(pointLight);
+        }
+
+        function createSky() {
+            // Create gradient sky using large sphere
+            const skyGeometry = new THREE.SphereGeometry(400, 32, 32);
+            const skyMaterial = new THREE.ShaderMaterial({
+                uniforms: {
+                    topColor: { value: new THREE.Color(CONFIG.colors.sky_top) },
+                    bottomColor: { value: new THREE.Color(CONFIG.colors.sky_bottom) },
+                    offset: { value: 33 },
+                    exponent: { value: 0.6 }
+                },
+                vertexShader: `
+                    varying vec3 vWorldPosition;
+                    void main() {
+                        vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+                        vWorldPosition = worldPosition.xyz;
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    uniform vec3 topColor;
+                    uniform vec3 bottomColor;
+                    uniform float offset;
+                    uniform float exponent;
+                    varying vec3 vWorldPosition;
+                    void main() {
+                        float h = normalize(vWorldPosition + offset).y;
+                        gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h, 0.0), exponent), 0.0)), 1.0);
+                    }
+                `,
+                side: THREE.BackSide
+            });
+            const sky = new THREE.Mesh(skyGeometry, skyMaterial);
+            scene.add(sky);
+            
+            // Add sun disk
+            const sunGeometry = new THREE.SphereGeometry(8, 16, 16);
+            const sunMaterial = new THREE.MeshBasicMaterial({ 
+                color: CONFIG.colors.sun,
+                emissive: CONFIG.colors.sun,
+                emissiveIntensity: 0.3
+            });
+            const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+            sun.position.set(150, 80, -100);
+            scene.add(sun);
+        }
+
+        function createGround() {
+            // Create infinite ground plane
+            const groundGeometry = new THREE.PlaneGeometry(2000, 2000, 50, 50);
+            const groundMaterial = new THREE.MeshLambertMaterial({ 
+                color: CONFIG.colors.ground,
+                transparent: true,
+                opacity: 0.8
+            });
+            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+            ground.rotation.x = -Math.PI / 2;
+            ground.position.y = -100;
+            ground.receiveShadow = true;
+            scene.add(ground);
+            
+            // Add ground details with procedural geometry
+            for(let i = 0; i < 20; i++) {
+                const detailGeometry = new THREE.BoxGeometry(
+                    Math.random() * 20 + 5, 
+                    Math.random() * 10 + 2, 
+                    Math.random() * 20 + 5
+                );
+                const detailMaterial = new THREE.MeshLambertMaterial({ 
+                    color: new THREE.Color().setHSL(0.1, 0.3, Math.random() * 0.3 + 0.3)
+                });
+                const detail = new THREE.Mesh(detailGeometry, detailMaterial);
+                detail.position.set(
+                    (Math.random() - 0.5) * 1000,
+                    -95,
+                    (Math.random() - 0.5) * 1000
+                );
+                detail.castShadow = true;
+                detail.receiveShadow = true;
+                scene.add(detail);
+            }
+        }
+
+        function createAirplane() {
+            airplane = new THREE.Group();
+            
+            // Fuselage (main body)
+            const fuselageGeometry = new THREE.CylinderGeometry(0.8, 1.2, 8, 8);
+            const fuselageMaterial = new THREE.MeshPhongMaterial({ 
+                color: CONFIG.colors.airplane_body,
+                shininess: 100
+            });
+            const fuselage = new THREE.Mesh(fuselageGeometry, fuselageMaterial);
+            fuselage.rotation.z = Math.PI / 2;
+            fuselage.castShadow = true;
+            airplane.add(fuselage);
+            
+            // Wings
+            const wingGeometry = new THREE.BoxGeometry(12, 0.3, 3);
+            const wingMaterial = new THREE.MeshPhongMaterial({ 
+                color: CONFIG.colors.airplane_wings,
+                shininess: 80
+            });
+            const leftWing = new THREE.Mesh(wingGeometry, wingMaterial);
+            leftWing.position.set(0, -0.5, 0);
+            leftWing.castShadow = true;
+            airplane.add(leftWing);
+            
+            // Tail fins
+            const tailGeometry = new THREE.BoxGeometry(0.3, 3, 2);
+            const tailMaterial = new THREE.MeshPhongMaterial({ 
+                color: CONFIG.colors.airplane_wings,
+                shininess: 80
+            });
+            const tail = new THREE.Mesh(tailGeometry, tailMaterial);
+            tail.position.set(-3, 1, 0);
+            tail.castShadow = true;
+            airplane.add(tail);
+            
+            // Cockpit
+            const cockpitGeometry = new THREE.SphereGeometry(1, 8, 6);
+            const cockpitMaterial = new THREE.MeshPhongMaterial({ 
+                color: 0x333333,
+                transparent: true,
+                opacity: 0.7,
+                shininess: 200
+            });
+            const cockpit = new THREE.Mesh(cockpitGeometry, cockpitMaterial);
+            cockpit.position.set(2, 0.5, 0);
+            cockpit.scale.set(0.8, 0.6, 0.8);
+            cockpit.castShadow = true;
+            airplane.add(cockpit);
+            
+            // Propeller
+            propeller = new THREE.Group();
+            const propGeometry = new THREE.BoxGeometry(0.1, 4, 0.3);
+            const propMaterial = new THREE.MeshPhongMaterial({ color: 0x654321 });
+            
+            const prop1 = new THREE.Mesh(propGeometry, propMaterial);
+            const prop2 = new THREE.Mesh(propGeometry, propMaterial);
+            prop2.rotation.z = Math.PI / 2;
+            
+            propeller.add(prop1);
+            propeller.add(prop2);
+            propeller.position.set(4, 0, 0);
+            airplane.add(propeller);
+            
+            // Position airplane
+            airplane.position.set(0, 20, 0);
+            airplane.castShadow = true;
+            scene.add(airplane);
+        }
+
+        function initParticles() {
+            // Engine trail particles will be created dynamically
+            particles.engineTrail = [];
+            particles.explosion = [];
+            particles.sparkle = [];
+        }
+
+        function createEngineTrail() {
+            const particleGeometry = new THREE.SphereGeometry(0.3, 4, 4);
+            const particleMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0xFFAAAA,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            for(let i = 0; i < 10; i++) {
+                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                particle.position.copy(airplane.position);
+                particle.position.x -= 5 + i * 0.5;
+                particle.position.y += (Math.random() - 0.5) * 2;
+                particle.position.z += (Math.random() - 0.5) * 2;
+                particle.scale.setScalar(1 - i * 0.1);
+                particle.material = particleMaterial.clone();
+                particle.material.opacity = 0.8 - i * 0.08;
+                
+                particles.engineTrail.push(particle);
+                scene.add(particle);
+                
+                // Remove particle after short time
+                setTimeout(() => {
+                    scene.remove(particle);
+                    const index = particles.engineTrail.indexOf(particle);
+                    if(index > -1) particles.engineTrail.splice(index, 1);
+                }, 1000);
+            }
+        }
+
+        function createExplosion(position) {
+            cameraShake = 1.0;
+            
+            for(let i = 0; i < 30; i++) {
+                const particleGeometry = new THREE.SphereGeometry(Math.random() * 0.5 + 0.2, 4, 4);
+                const particleMaterial = new THREE.MeshBasicMaterial({ 
+                    color: new THREE.Color().setHSL(Math.random() * 0.1, 1, 0.5),
+                    transparent: true,
+                    opacity: 1
+                });
+                
+                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                particle.position.copy(position);
+                
+                const velocity = new THREE.Vector3(
+                    (Math.random() - 0.5) * 20,
+                    (Math.random() - 0.5) * 20,
+                    (Math.random() - 0.5) * 20
+                );
+                
+                particle.userData = { velocity, life: 1.0 };
+                particles.explosion.push(particle);
+                scene.add(particle);
+            }
+        }
+
+        function createRingSparkle(position) {
+            for(let i = 0; i < 15; i++) {
+                const particleGeometry = new THREE.SphereGeometry(0.2, 4, 4);
+                const particleMaterial = new THREE.MeshBasicMaterial({ 
+                    color: 0xFFFF00,
+                    transparent: true,
+                    opacity: 1
+                });
+                
+                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                particle.position.copy(position);
+                particle.position.add(new THREE.Vector3(
+                    (Math.random() - 0.5) * 10,
+                    (Math.random() - 0.5) * 10,
+                    (Math.random() - 0.5) * 10
+                ));
+                
+                const velocity = new THREE.Vector3(
+                    (Math.random() - 0.5) * 10,
+                    Math.random() * 10 + 5,
+                    (Math.random() - 0.5) * 10
+                );
+                
+                particle.userData = { velocity, life: 1.0 };
+                particles.sparkle.push(particle);
+                scene.add(particle);
+            }
+        }
+
+        function spawnObstacles() {
+            const currentDistance = distance;
+            
+            // Spawn rings
+            if(currentDistance - lastRingSpawn > CONFIG.obstacles.ring.spawn_interval) {
+                createRing();
+                lastRingSpawn = currentDistance;
+            }
+            
+            // Spawn mountains
+            if(currentDistance - lastMountainSpawn > CONFIG.obstacles.mountain.spawn_interval) {
+                createMountain();
+                lastMountainSpawn = currentDistance;
+            }
+            
+            // Spawn cloud barriers
+            if(currentDistance - lastCloudSpawn > CONFIG.obstacles.cloud_barrier.spawn_interval) {
+                createCloudBarrier();
+                lastCloudSpawn = currentDistance;
+            }
+        }
+
+        function createRing() {
+            const ringGeometry = new THREE.TorusGeometry(
+                CONFIG.obstacles.ring.radius,
+                CONFIG.obstacles.ring.tube_radius,
+                8, 16
+            );
+            const ringMaterial = new THREE.MeshPhongMaterial({ 
+                color: CONFIG.obstacles.ring.color,
+                emissive: CONFIG.obstacles.ring.color,
+                emissiveIntensity: 0.2,
+                shininess: 100
+            });
+            
+            const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+            ring.position.set(
+                airplane.position.x + 100 + Math.random() * 50,
+                10 + Math.random() * 40,
+                (Math.random() - 0.5) * 60
+            );
+            ring.rotation.y = Math.random() * Math.PI;
+            ring.userData = { type: 'ring', collected: false };
+            
+            obstacles.push(ring);
+            scene.add(ring);
+        }
+
+        function createMountain() {
+            const size = CONFIG.obstacles.mountain.size_range[0] + 
+                        Math.random() * (CONFIG.obstacles.mountain.size_range[1] - CONFIG.obstacles.mountain.size_range[0]);
+            
+            const mountainGeometry = new THREE.ConeGeometry(size, size * 1.5, 8);
+            const mountainMaterial = new THREE.MeshLambertMaterial({ 
+                color: CONFIG.obstacles.mountain.color
+            });
+            
+            const mountain = new THREE.Mesh(mountainGeometry, mountainMaterial);
+            mountain.position.set(
+                airplane.position.x + 120 + Math.random() * 80,
+                size * 0.75 - 100,
+                (Math.random() - 0.5) * 100
+            );
+            mountain.castShadow = true;
+            mountain.receiveShadow = true;
+            mountain.userData = { type: 'mountain' };
+            
+            obstacles.push(mountain);
+            scene.add(mountain);
+        }
+
+        function createCloudBarrier() {
+            const size = CONFIG.obstacles.cloud_barrier.size_range[0] + 
+                        Math.random() * (CONFIG.obstacles.cloud_barrier.size_range[1] - CONFIG.obstacles.cloud_barrier.size_range[0]);
+            
+            // Create cloud using multiple spheres
+            const cloudGroup = new THREE.Group();
+            
+            for(let i = 0; i < 5; i++) {
+                const cloudGeometry = new THREE.SphereGeometry(
+                    size * (0.3 + Math.random() * 0.4), 
+                    8, 6
+                );
+                const cloudMaterial = new THREE.MeshLambertMaterial({ 
+                    color: CONFIG.colors.cloud,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                
+                const cloudPart = new THREE.Mesh(cloudGeometry, cloudMaterial);
+                cloudPart.position.set(
+                    (Math.random() - 0.5) * size,
+                    (Math.random() - 0.5) * size * 0.5,
+                    (Math.random() - 0.5) * size
+                );
+                
+                cloudGroup.add(cloudPart);
+            }
+            
+            cloudGroup.position.set(
+                airplane.position.x + 100 + Math.random() * 60,
+                20 + Math.random() * 30,
+                (Math.random() - 0.5) * 80
+            );
+            cloudGroup.userData = { type: 'cloud' };
+            
+            obstacles.push(cloudGroup);
+            scene.add(cloudGroup);
+        }
+
+        function setupControls() {
+            // Keyboard controls
+            document.addEventListener('keydown', (event) => {
+                keys[event.code] = true;
+                
+                if(gameState === 'start' && event.code === 'Space') {
+                    event.preventDefault();
+                    startGame();
+                }
+                
+                if(gameState === 'playing') {
+                    if(event.code === 'KeyP' || event.code === 'Escape') {
+                        event.preventDefault();
+                        pauseGame();
+                    }
+                }
+                
+                if(gameState === 'paused') {
+                    if(event.code === 'KeyP' || event.code === 'Escape') {
+                        event.preventDefault();
+                        resumeGame();
+                    }
+                }
+                
+                if(gameState === 'gameOver' && event.code === 'KeyR') {
+                    event.preventDefault();
+                    restartGame();
+                }
+            });
+            
+            document.addEventListener('keyup', (event) => {
+                keys[event.code] = false;
+            });
+            
+            // Mouse controls (optional camera movement)
+            document.addEventListener('mousemove', (event) => {
+                if(gameState === 'playing') {
+                    // Subtle mouse influence on camera
+                    const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                    const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+                    
+                    // Apply small offset to camera based on mouse
+                    camera.position.x += mouseX * 0.5;
+                    camera.position.y += mouseY * 0.3;
+                }
+            });
+            
+            // Button click handlers
+            document.getElementById('startButton').addEventListener('click', startGame);
+            document.getElementById('restartButton').addEventListener('click', restartGame);
+            
+            // Window resize handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        function startGame() {
+            gameState = 'playing';
+            score = 0;
+            rings = 0;
+            distance = 0;
+            speed = CONFIG.initial_speed;
+            gameTime = 0;
+            startTime = Date.now();
+            
+            // Reset airplane position
+            airplane.position.set(0, 20, 0);
+            airplane.rotation.set(0, 0, 0);
+            
+            // Clear obstacles
+            obstacles.forEach(obstacle => scene.remove(obstacle));
+            obstacles = [];
+            
+            // Clear particles
+            Object.values(particles).forEach(particleArray => {
+                particleArray.forEach(particle => scene.remove(particle));
+            });
+            particles = { engineTrail: [], explosion: [], sparkle: [] };
+            
+            // Reset spawn timers
+            lastRingSpawn = 0;
+            lastMountainSpawn = 0;
+            lastCloudSpawn = 0;
+            
+            // Show game UI
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('gameHUD').classList.remove('hidden');
+            document.getElementById('crosshair').classList.remove('hidden');
+            
+            updateUI();
+        }
+
+        function pauseGame() {
+            if(gameState === 'playing') {
+                gameState = 'paused';
+                document.getElementById('pauseScreen').classList.remove('hidden');
+            }
+        }
+
+        function resumeGame() {
+            if(gameState === 'paused') {
+                gameState = 'playing';
+                document.getElementById('pauseScreen').classList.add('hidden');
+            }
+        }
+
+        function gameOver() {
+            gameState = 'gameOver';
+            
+            // Update high score
+            if(score > highScore) {
+                highScore = score;
+            }
+            
+            // Create explosion at airplane position
+            createExplosion(airplane.position);
+            
+            // Show game over screen
+            setTimeout(() => {
+                document.getElementById('gameHUD').classList.add('hidden');
+                document.getElementById('crosshair').classList.add('hidden');
+                document.getElementById('gameOverScreen').classList.remove('hidden');
+                
+                document.getElementById('finalScore').textContent = `Score: ${score}`;
+                document.getElementById('highScore').textContent = `Best: ${highScore}`;
+            }, 1000);
+        }
+
+        function restartGame() {
+            document.getElementById('gameOverScreen').classList.add('hidden');
+            startGame();
+        }
+
+        function updateAirplane() {
+            if(gameState !== 'playing') return;
+            
+            // Handle input
+            let pitchInput = 0;
+            let yawInput = 0;
+            let rollInput = 0;
+            let boost = false;
+            
+            if(keys['ArrowUp'] || keys['KeyW']) pitchInput = 1;
+            if(keys['ArrowDown'] || keys['KeyS']) pitchInput = -1;
+            if(keys['ArrowLeft'] || keys['KeyA']) { yawInput = 1; rollInput = -0.5; }
+            if(keys['ArrowRight'] || keys['KeyD']) { yawInput = -1; rollInput = 0.5; }
+            if(keys['Space']) boost = true;
+            
+            // Update speed
+            if(boost && speed < CONFIG.max_speed) {
+                speed += CONFIG.acceleration_rate;
+            } else if(!boost && speed > CONFIG.initial_speed) {
+                speed -= CONFIG.acceleration_rate * 0.5;
+            }
+            
+            // Gradually increase base speed over time for difficulty
+            const baseSpeedIncrease = gameTime * 0.001;
+            speed = Math.min(speed + baseSpeedIncrease, CONFIG.max_speed);
+            
+            // Apply movement
+            airplane.position.x += speed * 0.1;
+            airplane.position.y += pitchInput * CONFIG.turn_speed;
+            airplane.position.z += yawInput * CONFIG.turn_speed;
+            
+            // Keep airplane within bounds
+            airplane.position.y = Math.max(-20, Math.min(80, airplane.position.y));
+            airplane.position.z = Math.max(-100, Math.min(100, airplane.position.z));
+            
+            // Apply rotation for visual feedback
+            airplane.rotation.x = pitchInput * 0.3;
+            airplane.rotation.z = rollInput * 0.5;
+            airplane.rotation.y = yawInput * 0.2;
+            
+            // Rotate propeller
+            if(propeller) {
+                propeller.rotation.x += speed * 0.05;
+            }
+            
+            // Create engine trail effect
+            if(Math.random() < 0.3) {
+                createEngineTrail();
+            }
+            
+            // Update distance
+            distance = Math.floor(airplane.position.x / 10);
+        }
+
+        function updateCamera() {
+            if(!airplane) return;
+            
+            // Smooth camera follow
+            const targetPos = new THREE.Vector3(
+                airplane.position.x - CONFIG.camera_distance,
+                airplane.position.y + CONFIG.camera_height,
+                airplane.position.z
+            );
+            
+            // Apply camera shake if active
+            if(cameraShake > 0) {
+                targetPos.x += (Math.random() - 0.5) * cameraShake * 2;
+                targetPos.y += (Math.random() - 0.5) * cameraShake * 2;
+                targetPos.z += (Math.random() - 0.5) * cameraShake * 2;
+                cameraShake *= 0.95; // Decay shake
+            }
+            
+            camera.position.lerp(targetPos, 0.1);
+            camera.lookAt(airplane.position);
+        }
+
+        function updateObstacles() {
+            if(gameState !== 'playing') return;
+            
+            // Update and check collisions
+            for(let i = obstacles.length - 1; i >= 0; i--) {
+                const obstacle = obstacles[i];
+                
+                // Remove obstacles that are too far behind
+                if(obstacle.position.x < airplane.position.x - 50) {
+                    scene.remove(obstacle);
+                    obstacles.splice(i, 1);
+                    continue;
+                }
+                
+                // Check collisions
+                const distance = airplane.position.distanceTo(obstacle.position);
+                
+                if(obstacle.userData.type === 'ring' && !obstacle.userData.collected) {
+                    // Ring collision (collection)
+                    if(distance < CONFIG.obstacles.ring.radius) {
+                        obstacle.userData.collected = true;
+                        rings++;
+                        score += CONFIG.obstacles.ring.points;
+                        
+                        // Add speed bonus
+                        if(speed > CONFIG.scoring.speed_bonus_threshold) {
+                            score += 50; // Speed bonus
+                        }
+                        
+                        // Create sparkle effect
+                        createRingSparkle(obstacle.position);
+                        
+                        // Remove ring
+                        scene.remove(obstacle);
+                        obstacles.splice(i, 1);
+                    }
+                } else if(obstacle.userData.type === 'mountain' || obstacle.userData.type === 'cloud') {
+                    // Obstacle collision (game over)
+                    const collisionRadius = obstacle.userData.type === 'mountain' ? 15 : 12;
+                    if(distance < collisionRadius) {
+                        gameOver();
+                        return;
+                    }
+                }
+            }
+            
+            // Spawn new obstacles
+            spawnObstacles();
+        }
+
+        function updateParticles() {
+            // Update explosion particles
+            for(let i = particles.explosion.length - 1; i >= 0; i--) {
+                const particle = particles.explosion[i];
+                
+                particle.position.add(particle.userData.velocity.clone().multiplyScalar(0.1));
+                particle.userData.velocity.y -= 0.5; // Gravity
+                particle.userData.life -= 0.02;
+                particle.material.opacity = particle.userData.life;
+                
+                if(particle.userData.life <= 0) {
+                    scene.remove(particle);
+                    particles.explosion.splice(i, 1);
+                }
+            }
+            
+            // Update sparkle particles
+            for(let i = particles.sparkle.length - 1; i >= 0; i--) {
+                const particle = particles.sparkle[i];
+                
+                particle.position.add(particle.userData.velocity.clone().multiplyScalar(0.1));
+                particle.userData.velocity.y -= 0.3; // Gravity
+                particle.userData.life -= 0.03;
+                particle.material.opacity = particle.userData.life;
+                
+                if(particle.userData.life <= 0) {
+                    scene.remove(particle);
+                    particles.sparkle.splice(i, 1);
+                }
+            }
+        }
+
+        function updateUI() {
+            if(gameState !== 'playing') return;
+            
+            // Update score display
+            const distanceScore = Math.floor(distance * CONFIG.scoring.distance_multiplier);
+            const totalScore = score + distanceScore;
+            
+            document.getElementById('scoreDisplay').textContent = totalScore;
+            document.getElementById('ringsCollected').textContent = rings;
+            document.getElementById('speedDisplay').textContent = Math.round(speed);
+            document.getElementById('altitudeDisplay').textContent = Math.round(airplane.position.y);
+            document.getElementById('distanceDisplay').textContent = Math.round(distance);
+            
+            // Update final score for game over
+            score = totalScore;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if(gameState === 'playing') {
+                gameTime = Date.now() - startTime;
+                
+                updateAirplane();
+                updateObstacles();
+                updateParticles();
+                updateUI();
+            }
+            
+            updateCamera();
+            renderer.render(scene, camera);
+        }
+
+        // Initialize the game when page loads
+        init();
+    </script>
+</body>
+</html>
